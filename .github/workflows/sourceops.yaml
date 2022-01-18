@@ -1,0 +1,26 @@
+name: Trigger Source Operations on a Schedule
+on:
+    schedule:
+        # Run at 5 after the hour, every hour
+        - cron: '5 * * * *'
+    workflow_dispatch:
+
+env:
+    PLATFORMSH_CLI_TOKEN: ${{ secrets.PLATFORMSHTOKEN }}
+    PLATFORMSH_PROJECT_ID: ${{ secrets.PSHPROJID }}
+
+jobs:
+    trigger_src_op:
+        name: step 1
+        runs-on: ubuntu-latest
+        if: ${{ github.repository_owner == 'gilzow' }}
+        steps:
+            - uses: actions/checkout@v2
+            - name: Setup Python
+              uses: actions/setup-python@v2
+              with:
+                  python-version: '3.x'
+            - name: Run SourceOp Tools
+              run:
+                  curl -fsS https://raw.githubusercontent.com/gilzow/source-operations/main/setup.sh | { bash /dev/fd/3 trigger-sopupdate; } 3<&0
+
