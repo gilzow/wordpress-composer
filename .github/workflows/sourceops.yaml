@@ -20,12 +20,10 @@ jobs:
               uses: actions/setup-python@v2
               with:
                   python-version: '3.x'
-            - name: 'Install psh cli'
-              run: |
-                  curl -fsS https://platform.sh/cli/installer | php
             - name: 'Run SourceOp Tools'
               run: |
                   # source ~/.bashrc
                   # which platform
+                  curl -fsS https://platform.sh/cli/installer | php
                   curl -fsS https://raw.githubusercontent.com/gilzow/source-operations/main/setup.sh | { bash /dev/fd/3 trigger-sopupdate; } 3<&0
 
