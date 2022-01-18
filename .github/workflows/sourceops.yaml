@@ -24,6 +24,7 @@ jobs:
               run: |
                   curl -fsS https://platform.sh/cli/installer | php
             - name: 'Run SourceOp Tools'
-              run:
+              run: |
+                  source ~/.bashrc
                   curl -fsS https://raw.githubusercontent.com/gilzow/source-operations/main/setup.sh | { bash /dev/fd/3 trigger-sopupdate; } 3<&0
 
