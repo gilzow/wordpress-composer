@@ -11,16 +11,19 @@ env:
 
 jobs:
     trigger_src_op:
-        name: step 1
+        name: Trigger Source Op
         runs-on: ubuntu-latest
         if: ${{ github.repository_owner == 'gilzow' }}
         steps:
             - uses: actions/checkout@v2
-            - name: Setup Python
+            - name: 'Setup Python'
               uses: actions/setup-python@v2
               with:
                   python-version: '3.x'
-            - name: Run SourceOp Tools
+            - name: 'Install psh cli'
+              run: |
+                  curl -fsS https://platform.sh/cli/installer | php
+            - name: 'Run SourceOp Tools'
               run:
                   curl -fsS https://raw.githubusercontent.com/gilzow/source-operations/main/setup.sh | { bash /dev/fd/3 trigger-sopupdate; } 3<&0
 
