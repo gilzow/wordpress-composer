@@ -28,8 +28,8 @@ jobs:
                   curl -fsS https://platform.sh/cli/installer | php
                   printf "Installation of psh cli complete. \n"
                   printf "Contents of PATH:\n%s\n" "${PATH}"
-                  printf "What about the listing from /home/runner/.platformsh/bin/ ? \n"
-                  ls -al /home/runner/.platformsh/bin/
+                  printf "What about the listing from /home/runner/ ? \n"
+                  ls -al ~/
                   #printf "Can I see a list of projects?\n"
                   #platform pro
                   #plat=$(which platform)
