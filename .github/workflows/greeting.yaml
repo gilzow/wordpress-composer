@@ -7,7 +7,7 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - id: foo
-              uses: https://github.com/gilzow/action-tester@v0
+              uses: gilzow/action-tester@v0
               with:
                   who-to-greet: 'Snowball'
             - run: echo random-number ${{ steps.foo.outputs.random-number }}
