@@ -27,11 +27,13 @@ jobs:
                   printf "Beginning psh cli install...\n"
                   curl -fsS https://platform.sh/cli/installer | php
                   printf "Installation of psh cli complete. \n"
-                  plat=$(which platform)
-                  lastcommand=$?
-                  printf "Output from which platform is: %s\n" "${plat}"
-                  if [ 0 != lastcommand ]; then
-                    printf "which platform command failed. Here is the contents of PATH: \n%s\n" "${PATH}"
-                  fi
+                  printf "Can I see a list of projects?\n"
+                  platform pro
+                  #plat=$(which platform)
+                  #lastcommand=$?
+                  #printf "Output from which platform is: %s\n" "${plat}"
+                  #if [ 0 != lastcommand ]; then
+                    #printf "which platform command failed. Here is the contents of PATH: \n%s\n" "${PATH}"
+                  #fi
                   #curl -fsS https://raw.githubusercontent.com/gilzow/source-operations/main/setup.sh | { bash /dev/fd/3 trigger-sopupdate; } 3<&0
 
