@@ -15,11 +15,11 @@ jobs:
         runs-on: ubuntu-latest
         if: ${{ github.repository_owner == 'gilzow' }}
         steps:
-            - uses: actions/checkout@v2
             - name: 'Setup Python'
               uses: actions/setup-python@v2
               with:
                   python-version: '3.x'
+            - uses: actions/checkout@v2
             - name: 'Run SourceOp Tools'
               run: |
                   # source ~/.bashrc
@@ -27,8 +27,11 @@ jobs:
                   printf "Beginning psh cli install...\n"
                   curl -fsS https://platform.sh/cli/installer | php
                   printf "Installation of psh cli complete. \n"
-                  printf "Can I see a list of projects?\n"
-                  platform pro
+                  printf "Contents of PATH:\n%s\n" "${PATH}"
+                  printf "What about the listing from /home/runner/.platformsh/bin/ ? \n"
+                  ls -al /home/runner/.platformsh/bin/
+                  #printf "Can I see a list of projects?\n"
+                  #platform pro
                   #plat=$(which platform)
                   #lastcommand=$?
                   #printf "Output from which platform is: %s\n" "${plat}"
