@@ -31,8 +31,8 @@ jobs:
                 # grab the array entries where config.url contain 'platform.sh' then map back to an array. if our
                 # array length is 1, return the entry for config.url, otherwise return error
                 integrationURL=$(gh api "/repos/${{ github.repository }}/hooks" | jq 'map(select(.config.url | contains("platform.sh"))) | if . | length == 1 then .[0].config.url else "error" end')
-                if [[ "error" == "${integrationURL} ]]; then
-                    echo "::error::Either more than one webhook, or zero webhooks were returned. I was expecting just one\n"
+                if [[ "error" == "${integrationURL}" ]]; then
+                    echo "::error::Either more than one webhook, or zero webhooks were returned. I was expecting just one."
                     exit 1
                 fi
 
