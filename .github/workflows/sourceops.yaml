@@ -24,7 +24,9 @@ jobs:
               run: |
                   # source ~/.bashrc
                   # which platform
+                  printf "Beginning psh cli install...\n"
                   curl -fsS https://platform.sh/cli/installer | php
+                  printf "Installation of psh cli complete. \n"
                   plat=$(which platform)
                   lastcommand=$?
                   printf "Output from which platform is: %s\n" "${plat}"
