@@ -28,16 +28,14 @@ jobs:
                   curl -fsS https://platform.sh/cli/installer | php
                   printf "Installation of psh cli complete. \n"
                   printf "Contents of PATH:\n%s\n" "${PATH}"
-                  printf "Contents of bashrc...\n"
-                  cat ~/.bashrc
-
-                  printf "Can I see a list of projects?\n"
-                  ~/.platformsh/bin/platform pro
-                  #plat=$(which platform)
-                  #lastcommand=$?
-                  #printf "Output from which platform is: %s\n" "${plat}"
-                  #if [ 0 != lastcommand ]; then
-                    #printf "which platform command failed. Here is the contents of PATH: \n%s\n" "${PATH}"
-                  #fi
+                  export PATH="${HOME}/.platformsh/bin:${PATH}"
+                  plat=$(which platform)
+                  lastcommand=$?
+                  printf "Output from which platform is: %s\n" "${plat}"
+                  if [ 0 != lastcommand ]; then
+                    printf "which platform command failed. Here is the contents of PATH: \n%s\n" "${PATH}"
+                  fi
+                  printf "NOW Can I see a list of projects?\n"
+                  platform pro
                   #curl -fsS https://raw.githubusercontent.com/gilzow/source-operations/main/setup.sh | { bash /dev/fd/3 trigger-sopupdate; } 3<&0
 
