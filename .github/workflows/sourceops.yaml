@@ -19,23 +19,19 @@ jobs:
               uses: actions/setup-python@v2
               with:
                   python-version: '3.x'
+            - name: "Install PSH CLI tool"
+              run: |
+                  curl -fsS https://platform.sh/cli/installer | php
+                  # for some reason, sourcing our .bashrc file does not successfully prepend our path to PATH
+                  export PATH="${HOME}/.platformsh/bin:${PATH}"
             - uses: actions/checkout@v2
             - name: 'Run SourceOp Tools'
               run: |
-                  # source ~/.bashrc
-                  # which platform
-                  printf "Beginning psh cli install...\n"
-                  curl -fsS https://platform.sh/cli/installer | php
-                  printf "Installation of psh cli complete. \n"
-                  printf "Contents of PATH:\n%s\n" "${PATH}"
-                  export PATH="${HOME}/.platformsh/bin:${PATH}"
-                  plat=$(which platform)
-                  lastcommand=$?
-                  printf "Output from which platform is: %s\n" "${plat}"
-                  if [ 0 != lastcommand ]; then
-                    printf "which platform command failed. Here is the contents of PATH: \n%s\n" "${PATH}"
+                  if [[ "${PATH}" != *".platformsh"* ]]; then
+                    echo "psh installer not in PATH"
+                    export PATH="${HOME}/.platformsh/bin:${PATH}"
                   fi
-                  printf "NOW Can I see a list of projects?\n"
-                  platform pro
-                  #curl -fsS https://raw.githubusercontent.com/gilzow/source-operations/main/setup.sh | { bash /dev/fd/3 trigger-sopupdate; } 3<&0
+                  printf "Beginning Source Operations toolkit install...\n"
+
+                  curl -fsS https://raw.githubusercontent.com/gilzow/source-operations/main/setup.sh | { bash /dev/fd/3 trigger-sopupdate; } 3<&0
 
