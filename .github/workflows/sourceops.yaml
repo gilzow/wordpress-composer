@@ -28,12 +28,11 @@ jobs:
                   curl -fsS https://platform.sh/cli/installer | php
                   printf "Installation of psh cli complete. \n"
                   printf "Contents of PATH:\n%s\n" "${PATH}"
-                  printf "source our bashrc file...\n"
-                  source ~/.bashrc
-                  printf "Now what are the contents of PATH:\n%s\n" "${PATH}"
-                  which git
+                  printf "Contents of bashrc...\n"
+                  cat ~/.bashrc
+
                   printf "Can I see a list of projects?\n"
-                  platform pro
+                  ~/.platformsh/bin/platform pro
                   #plat=$(which platform)
                   #lastcommand=$?
                   #printf "Output from which platform is: %s\n" "${plat}"
