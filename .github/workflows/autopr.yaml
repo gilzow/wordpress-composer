@@ -19,12 +19,12 @@ jobs:
               id: prepautopr
               uses: gilzow/prep-for-autopr@main
               with:
-                github-token: ${{ secrets.DEVREL_TOKEN }}
+                github-token: ${{ secrets.GITHUB_TOKEN }}
 
             - name: 'Create & merge PR'
               id: create-merge-pr
               uses: gilzow/create-pr@main
               with:
-                  github-token: ${{ secrets.DEVREL_TOKEN }}
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
                   trigger-source: 'auto push'
                   default-branch: ${{ steps.prepautopr.outputs.default-branch }}
