@@ -1,0 +1,31 @@
+name: Trigger Auto PR on push to update branch
+on:
+    #push:
+        #branches:
+            #- update
+    workflow_dispatch:
+
+env:
+    PLATFORMSH_CLI_TOKEN: ${{ secrets.PLATFORMSHTOKEN }}
+    #PLATFORMSH_PROJECT_ID: ${{ secrets.PSHPROJID }}
+    GITHUB_TOKEN: ${{ secrets.DEVREL_TOKEN }}
+
+jobs:
+    create-auto-pr:
+        name: "Creates an auto merging PR when the branch is updated"
+        runs-on: ubuntu-latest
+        if: ${{ github.repository_owner == 'gilzow' }}
+        steps:
+            - name: 'Prep the repo for autoPR'
+              id: prepautopr
+              uses: gilzow/prep-for-autopr@main
+              with:
+                github-token: ${GITHUB_TOKEN}
+
+            - name: 'Create & merge PR'
+              id: create-merge-pr
+              uses: gilzow/create-pr@main
+              with:
+                  github-token: ${GITHUB_TOKEN}
+                  trigger-source: 'auto push'
+                  default-branch: ${{ steps.prepautopr.outputs.default-branch }}
