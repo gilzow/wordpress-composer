@@ -6,7 +6,7 @@ on:
       - completed
   pull_request:
     branches:
-      - main
+      - master
 env:
     GITHUB_TOKEN: ${{ secrets.DEVREL_TOKEN }}
 jobs:
