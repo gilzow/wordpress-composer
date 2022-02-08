@@ -1,0 +1,20 @@
+name: "not the smoke test"
+on:
+  workflow_run:
+    workflows: [ "platformsh" ]
+    types:
+      - completed
+  pull_request:
+    branches:
+      - master
+env:
+  GITHUB_TOKEN: ${{ secrets.DEVREL_TOKEN }}
+jobs:
+  i-too-will-test-pr:
+    name: Test the PR environment
+    runs-on: ubuntu-latest
+    steps:
+      - name: "I dont really do much"
+        id: i-dont-do-much
+        run: |
+          echo "::notice::I ran"
