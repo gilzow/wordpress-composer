@@ -1,14 +1,14 @@
 name: "smoke test"
 on:
   workflow_run:
-    workflows: ["platformsh"]
+    workflows: [ "platformsh" ]
     types:
       - completed
   pull_request:
     branches:
-      - main
+      - master
 env:
-    GITHUB_TOKEN: ${{ secrets.DEVREL_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.DEVREL_TOKEN }}
 jobs:
   test-pr-env:
     name: Test the PR environment
@@ -18,7 +18,7 @@ jobs:
         id: get-target-url
         uses: gilzow/retrieve-psh-prenv-url@main
         with:
-           github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: 'Does Our App Work?'
         id: smokescreen
         run: |
@@ -35,3 +35,15 @@ jobs:
             echo "::error::Response from environment was something other than 200. Response returned was ${response}"
             exit 1;
           fi
+  another-test:
+    name: "This is a quick hello"
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'just say hello'
+        id: say-hello
+        run: |
+          echo "::notice::Hello from the first step"
+      - name: 'another hello'
+        id: say-hello-again
+        run: |
+          echo "::notice::Another hello but this one from the second step"
